@@ -19,7 +19,7 @@ vcf:lowpass a lv2:Plugin, lv2:LowpassPlugin ;
   ] ;
 
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
-  lv2:property lv2:hardRtCapable ;
+  lv2:optionalFeature lv2:hardRtCapable ;
 
   lv2:port [
     a lv2:AudioPort, lv2:InputPort ;
@@ -91,7 +91,7 @@ vcf:lowpass_cv a lv2:Plugin, lv2:LowpassPlugin ;
   ] ;
 
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
-  lv2:property lv2:hardRtCapable ;
+  lv2:optionalFeature lv2:hardRtCapable ;
 
   lv2:port [
     a lv2:AudioPort, lv2:InputPort ;

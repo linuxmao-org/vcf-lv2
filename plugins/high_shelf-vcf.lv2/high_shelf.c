@@ -61,6 +61,7 @@ static void activateHighShelf(LV2_Handle instance)
 static void runHighShelf(LV2_Handle instance, uint32_t sample_count)
 {
     uint32_t l1;
+    float out;
     double f, q, pi2_rate;
     float A, iv_beta;
     double *buf;
@@ -100,13 +101,13 @@ static void runHighShelf(LV2_Handle instance, uint32_t sample_count)
     a2 = A + 1.0 - (A - 1.0) * iv_cos - iv_beta * iv_sin;
     inv_a0 = 1.0 / a0;
     for (l1 = 0; l1 < sample_count; l1++) {
-        output[l1] = inv_a0 * (gain
+        out = inv_a0 * (gain
             * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                 - a1 * buf[2] - a2 * buf[3]);
         buf[1] = buf[0];
         buf[0] = input[l1];
         buf[3] = buf[2];
-        buf[2] = output[l1];
+        buf[2] = output[l1] = out;
     }
 }
 
@@ -169,6 +170,7 @@ static void activateHighShelfCV(LV2_Handle instance)
 static void runHighShelfCV(LV2_Handle instance, uint32_t sample_count)
 {
     uint32_t l1;
+    float out;
     double f0, q0, f, q, pi2_rate;
     float A, dBgain, iv_beta;
     double *buf;
@@ -217,13 +219,13 @@ static void runHighShelfCV(LV2_Handle instance, uint32_t sample_count)
         a2 = A + 1.0 - (A - 1.0) * iv_cos - iv_beta * iv_sin;
         inv_a0 = 1.0 / a0;
         for (l1 = 0; l1 < sample_count; l1++) {
-            output[l1] = inv_a0 * (gain
+            out = inv_a0 * (gain
                 * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                     - a1 * buf[2] - a2 * buf[3]);
             buf[1] = buf[0];
             buf[0] = input[l1];
             buf[3] = buf[2];
-            buf[2] = output[l1];
+            buf[2] = output[l1] = out;
         }
     }
     else {
@@ -254,13 +256,13 @@ static void runHighShelfCV(LV2_Handle instance, uint32_t sample_count)
                 a0 = A + 1.0 - (A - 1.0) * iv_cos + iv_beta * iv_sin;
                 a1 = 2.0 * (A - 1.0 - (A + 1.0) * iv_cos);
                 a2 = A + 1.0 - (A - 1.0) * iv_cos - iv_beta * iv_sin;
-                output[l1] = 1.0 / a0 * (gain
+                out = 1.0 / a0 * (gain
                     * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                         - a1 * buf[2] - a2 * buf[3]);
                 buf[1] = buf[0];
                 buf[0] = input[l1];
                 buf[3] = buf[2];
-                buf[2] = output[l1];
+                buf[2] = output[l1] = out;
             }
         }
         else {
@@ -291,13 +293,13 @@ static void runHighShelfCV(LV2_Handle instance, uint32_t sample_count)
                 a1 = 2.0 * (A - 1.0 - (A + 1.0) * iv_cos);
                 a2 = A + 1.0 - (A - 1.0) * iv_cos - iv_beta * iv_sin;
                 inv_a0 = 1.0 / a0;
-                output[l1] = inv_a0 * (gain
+                out = inv_a0 * (gain
                     * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                         - a1 * buf[2] - a2 * buf[3]);
                 buf[1] = buf[0];
                 buf[0] = input[l1];
                 buf[3] = buf[2];
-                buf[2] = output[l1];
+                buf[2] = output[l1] = out;
             }
         }
     }

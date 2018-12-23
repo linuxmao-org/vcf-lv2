@@ -60,6 +60,7 @@ static void activateBandpass2(LV2_Handle instance)
 static void runBandpass2(LV2_Handle instance, uint32_t sample_count)
 {
     uint32_t l1;
+    float out;
     double f, q, pi2_rate;
     double *buf;
     double iv_sin, iv_cos, iv_alpha, inv_a0, a0, a1, a2, b0, b1, b2;
@@ -94,13 +95,13 @@ static void runBandpass2(LV2_Handle instance, uint32_t sample_count)
     a2 = 1.0 - iv_alpha;
     inv_a0 = 1.0 / a0;
     for (l1 = 0; l1 < sample_count; l1++) {
-        output[l1] = inv_a0 * (gain
+        out = inv_a0 * (gain
             * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                 - a1 * buf[2] - a2 * buf[3]);
         buf[1] = buf[0];
         buf[0] = input[l1];
         buf[3] = buf[2];
-        buf[2] = output[l1];
+        buf[2] = output[l1] = out;
     }
 }
 
@@ -161,6 +162,7 @@ static void activateBandpass2CV(LV2_Handle instance)
 static void runBandpass2CV(LV2_Handle instance, uint32_t sample_count)
 {
     uint32_t l1;
+    float out;
     double f0, q0, f, q, pi2_rate;
     double *buf;
     double iv_sin, iv_cos, iv_alpha, inv_a0, a0, a1, a2, b0, b1, b2;
@@ -202,13 +204,13 @@ static void runBandpass2CV(LV2_Handle instance, uint32_t sample_count)
         a2 = 1.0 - iv_alpha;
         inv_a0 = 1.0 / a0;
         for (l1 = 0; l1 < sample_count; l1++) {
-            output[l1] = inv_a0 * (gain
+            out = inv_a0 * (gain
                 * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                     - a1 * buf[2] - a2 * buf[3]);
             buf[1] = buf[0];
             buf[0] = input[l1];
             buf[3] = buf[2];
-            buf[2] = output[l1];
+            buf[2] = output[l1] = out;
         }
     }
     else {
@@ -236,13 +238,13 @@ static void runBandpass2CV(LV2_Handle instance, uint32_t sample_count)
                 a0 = 1.0 + iv_alpha;
                 a1 = -2.0 * iv_cos;
                 a2 = 1.0 - iv_alpha;
-                output[l1] = 1.0 / a0 * (gain
+                out = 1.0 / a0 * (gain
                     * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                         - a1 * buf[2] - a2 * buf[3]);
                 buf[1] = buf[0];
                 buf[0] = input[l1];
                 buf[3] = buf[2];
-                buf[2] = output[l1];
+                buf[2] = output[l1] = out;
             }
         }
         else {
@@ -270,13 +272,13 @@ static void runBandpass2CV(LV2_Handle instance, uint32_t sample_count)
                 a1 = -2.0 * iv_cos;
                 a2 = 1.0 - iv_alpha;
                 inv_a0 = 1.0 / a0;
-                output[l1] = inv_a0 * (gain
+                out = inv_a0 * (gain
                     * (b0 * input[l1] + b1 * buf[0] + b2 * buf[1])
                         - a1 * buf[2] - a2 * buf[3]);
                 buf[1] = buf[0];
                 buf[0] = input[l1];
                 buf[3] = buf[2];
-                buf[2] = output[l1];
+                buf[2] = output[l1] = out;
             }
         }
     }

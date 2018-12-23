@@ -3,7 +3,7 @@ INSTALL_DIR = $(PREFIX)/lib/lv2
 
 
 PLUGPKG = vcf
-VERSION = 0.0.1
+VERSION = 0.0.2
 
 PLUGINS = \
         bandpass1-vcf.lv2       \
