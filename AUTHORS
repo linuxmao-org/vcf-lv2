@@ -1,0 +1,11 @@
+
+Original C-code: VCF LADSPA plugins:
+Matthias Nagorni
+
+
+LV2 port
+2009 James Morris <james@jwm-art.net>
+
+The file Makefile is a slightly modified version of the
+Makefile in the swh-lv2 project by Steve Harris.
+

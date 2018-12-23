@@ -1,0 +1,13 @@
+@prefix : <http://lv2plug.in/ns/lv2core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vcf:  <http://jwm-art.net/lv2/vcf/> .
+
+vcf:@NAME@ a :Plugin ;
+  :binary <@NAME@-@OS@.so> ;
+  rdfs:seeAlso <@NAME@.ttl> ;
+.
+
+vcf:@NAME@_cv a :Plugin ;
+  :binary <@NAME@-@OS@.so> ;
+  rdfs:seeAlso <@NAME@.ttl> ;
+.
