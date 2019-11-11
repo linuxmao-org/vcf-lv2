@@ -14,15 +14,15 @@ Install
 
 To build:
 
-make
+`make`
 
 To install for all users, system wide:
 
-sudo make install-system
+`sudo make install-system`
 
 To install for just your user:
 
-make install-user
+`make install-user`
 
 
 NOTES
